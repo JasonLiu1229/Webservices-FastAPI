@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Response
 import httpx
 import datetime
 import time
@@ -159,7 +159,7 @@ async def get_country_forecast(country: str, day: int):
         # return forecast of the country as json response
 
     # make a request to QuickChart to generate a chart
-    url = "https://quickchart.io/chart/create"
+    url = "https://quickchart.io/chart"
 
     chart_data = convert_data_to_chartJS(forecast['list'])
 
@@ -177,9 +177,10 @@ async def get_country_forecast(country: str, day: int):
         response = await client.post(url, json=quick_chart_data)
         if response.status_code != 200:
             raise HTTPException(status_code=404, detail="Chart not found")
-        chart = response.json()
         # return chart of the forecast as json response
-        return {"content": chart['url']}
+        return Response(status_code=200,
+                        media_type="image/png",
+                        content=response.content)
 
 
 
