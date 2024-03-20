@@ -13,17 +13,16 @@ COUNTRY_ERROR = "Country not found"
 
 
 @router.get("")
-async def get_country(continent: str):
+async def get_country(continent: str = None):
     """
     Get a list of countries in a continent if continent is given.
     Else, get a list of all countries.
     :param continent: continent in string
     :return: list of countries in json response
     """
-    continent = continent.lower()
-
     # make a request to rest countries to get a list of countries
     if continent:
+        continent = continent.lower()
         url = f"https://restcountries.com/v3.1/region/{continent}"
     else:
         url = "https://restcountries.com/v3.1/all"

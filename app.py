@@ -7,8 +7,7 @@ app = FastAPI(
     description="API to get country details and add to favorite list.",
     version="1.0.0",
     docs_url="/docs",
-    redoc_url=None,
-    prefix="/api"
+    redoc_url=None
 )
 
 app.include_router(country.router)
