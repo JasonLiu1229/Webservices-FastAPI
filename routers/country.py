@@ -35,7 +35,7 @@ async def get_country(continent: str):
         # filter out the country names
         country_list = [country['name']['common'] for country in countries]
         # return list of countries as json response
-        return {"content": country_list}
+        return {"List of countries": country_list}
 
 
 @router.get("/{country}")
@@ -63,7 +63,7 @@ async def get_country_detail(country: str):
             "population": country_detail[0]['population'],
             "area": country_detail[0]['area']
         }
-        return {"content": country_detail_filtered}
+        return {"Country details": country_detail_filtered}
 
 
 @router.get("/{country}/temperature")
@@ -100,7 +100,7 @@ async def get_country_temperature(country: str):
             raise HTTPException(status_code=404, detail="Temperature not found")
         temperature = response.json()
         # return temperature of the country as json response
-        return {"content": temperature['main']['temp']}, 200
+        return {"Temperature": temperature['main']['temp']}
 
 
 @router.get("/{country}/forecast/{day}")
@@ -161,13 +161,25 @@ async def get_country_forecast(country: str, day: int):
     # make a request to QuickChart to generate a chart
     url = "https://quickchart.io/chart/create"
 
+    chart_data = convert_data_to_chartJS(forecast['list'])
+
+    quick_chart_data = {
+        "width": 500,
+        "height": 300,
+        "format": "png",
+        "chart": {
+            "type": "line",
+            "data": chart_data
+        }
+    }
+
     async with httpx.AsyncClient() as client:
-        response = await client.post(url, json=convert_data_to_chartJS(forecast.get('list')))
+        response = await client.post(url, json=quick_chart_data)
         if response.status_code != 200:
             raise HTTPException(status_code=404, detail="Chart not found")
         chart = response.json()
         # return chart of the forecast as json response
-        return {"content": chart['url']}, 200
+        return {"content": chart['url']}
 
 
 
