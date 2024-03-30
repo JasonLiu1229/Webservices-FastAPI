@@ -14,7 +14,7 @@ get_api_key() {
 }
 
 # Function to test country using test.py
-test_country_code() {
+test_country() {
     echo "Testing country functions"
 
     python3 -c "import test; test.test_all_functions_country()"
@@ -45,7 +45,7 @@ test_hottest_country() {
 get_api_key
 
 # Call the test functions
-test_country_code
+test_country
 test_favorite
 test_hottest_country
 
