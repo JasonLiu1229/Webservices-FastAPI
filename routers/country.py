@@ -182,8 +182,6 @@ async def get_country_forecast(country: str, day: int):
                         content=response.content)
 
 
-
-
 def convert_data_to_chartJS(data: list):
     """
     Convert a list of data to chartJS format supported by QuickChart
