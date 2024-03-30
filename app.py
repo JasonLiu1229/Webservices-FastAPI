@@ -10,5 +10,11 @@ app = FastAPI(
     redoc_url=None
 )
 
+
+@app.get("/")
+def read_root():
+    return {'message': 'Check out the documentation at /docs'}
+
+
 app.include_router(country.router)
 app.include_router(favorite.router)
