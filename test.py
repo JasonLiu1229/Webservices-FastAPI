@@ -92,8 +92,20 @@ def test_hottest_country_sa() -> None:
 
     print('-----------------------------------')
 
+    # Display the favorite list
+    response = client.get("/favorite")
+    print(response.json())
+
+    print('-----------------------------------')
+
     # Favorite the warmest country
     response = client.post(f"/favorite/{warmest_country[1]}")
+    print(response.json())
+
+    print('-----------------------------------')
+
+    # Display the favorite list
+    response = client.get("/favorite")
     print(response.json())
 
     print('-----------------------------------')
