@@ -7,6 +7,7 @@ start_webservice() {
     # Install the required packages
     pip install -r requirements.txt
     # Start the webservice
+    echo "Starting the webservice"
     python3 api_start.py &
     # Print the process id
     pid=$!
@@ -14,6 +15,7 @@ start_webservice() {
 
 stop_webservice() {
     # Kill the process
+    echo "Stopping the webservice"
     kill -9 $pid
     # wait for the process to terminate
     wait $pid
