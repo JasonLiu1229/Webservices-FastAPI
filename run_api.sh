@@ -3,7 +3,7 @@
 # Function to start the webservice
 start_webservice() {
     # Activate the virtual environment, one of the two commands will work (Linux/Windows)
-    source venv/bin/activate || source venv/Scripts/activate
+    source venv/bin/activate || venv/Scripts/Activate
     # Install the required packages
     pip install -r requirements.txt
     # Start the webservice

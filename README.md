@@ -3,6 +3,8 @@
 This project makes use of FastAPI to create a RESTful API.
 
 ## Installation
+Prerequirements is that we run this on Ubuntu or wsl.
+
 1. Clone the repository
 2. Make a virtual environment
 ```bash
